@@ -17,6 +17,26 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+app.get('/',function(req, res){
+    res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+app.get('/css', function(req, res) {
+    res.sendFile(path.join(__dirname, '../styles.css'))
+  })
+
+  app.get('/js', (req, res) => {
+    res.sendFile(path.join(__dirname, '../main.js'))
+  })
+
+try {
+    rollbar.log("display error")
+    // nonExistentFunction();
+  } catch (error) {
+    console.error(error);
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+  }
 
 
 
